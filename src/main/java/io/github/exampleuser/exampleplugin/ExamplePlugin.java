@@ -3,7 +3,6 @@ package io.github.exampleuser.exampleplugin;
 import com.github.milkdrinkers.colorparser.ColorParser;
 import io.github.exampleuser.exampleplugin.command.CommandHandler;
 import io.github.exampleuser.exampleplugin.config.ConfigHandler;
-import io.github.exampleuser.exampleplugin.db.DatabaseHandler;
 import io.github.exampleuser.exampleplugin.hooks.VaultHook;
 import io.github.exampleuser.exampleplugin.listener.ListenerHandler;
 import io.github.exampleuser.exampleplugin.utility.Logger;
@@ -16,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
 public class ExamplePlugin extends JavaPlugin {
     private static ExamplePlugin instance;
     private ConfigHandler configHandler;
-    private DatabaseHandler databaseHandler;
     private CommandHandler commandHandler;
     private ListenerHandler listenerHandler;
     private static VaultHook vaultHook;
@@ -34,13 +32,11 @@ public class ExamplePlugin extends JavaPlugin {
     public void onLoad() {
         instance = this;
         configHandler = new ConfigHandler(instance);
-        databaseHandler = new DatabaseHandler(instance);
         commandHandler = new CommandHandler(instance);
         listenerHandler = new ListenerHandler(instance);
         vaultHook = new VaultHook(instance);
 
         configHandler.onLoad();
-        databaseHandler.onLoad();
         commandHandler.onLoad();
         listenerHandler.onLoad();
         vaultHook.onLoad();
@@ -49,7 +45,6 @@ public class ExamplePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         configHandler.onEnable();
-        databaseHandler.onEnable();
         commandHandler.onEnable();
         listenerHandler.onEnable();
         vaultHook.onEnable();
@@ -64,20 +59,9 @@ public class ExamplePlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         configHandler.onDisable();
-        databaseHandler.onDisable();
         commandHandler.onDisable();
         listenerHandler.onDisable();
         vaultHook.onDisable();
-    }
-
-    /**
-     * Gets data handler.
-     *
-     * @return the data handler
-     */
-    @NotNull
-    public DatabaseHandler getDataHandler() {
-        return databaseHandler;
     }
 
     /**
