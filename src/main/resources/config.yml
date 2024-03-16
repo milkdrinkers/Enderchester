@@ -1,3 +1,15 @@
+check:
+  # Should we check the player for "enderchester.use"
+  permission: true
+  # Should we disallow opening ender chests in creative mode?
+  creative: false
+  # A list of worldnames, players won't be able to open ender chests through inventory or by holding them in hand here
+  blacklist:
+    enabled: false
+    worlds:
+      - worldname1
+      - someworldname2
+
 sound:
   # Should a ender chest opening sound be played when it is opened through the plugin?
   opening: true

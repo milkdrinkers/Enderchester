@@ -2,6 +2,7 @@ package io.github.milkdrinkers.enderchester.listener;
 
 import io.github.milkdrinkers.enderchester.Enderchester;
 import io.github.milkdrinkers.enderchester.utility.Cfg;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -66,6 +67,15 @@ public class EnderChestListener implements Listener {
 
     private void openEnderChest(Player p, ItemStack item) {
         if (!item.getType().equals(Material.ENDER_CHEST))
+            return;
+
+        if (Cfg.get().getOrDefault("check.permission", true) && !p.hasPermission("enderchester.use"))
+            return;
+
+        if (Cfg.get().getOrDefault("check.creative", false) && p.getGameMode().equals(GameMode.CREATIVE))
+            return;
+
+        if (Cfg.get().getOrDefault("check.blacklist.enabled", false) && Cfg.get().getStringList("check.blacklist.worlds").contains(p.getWorld().getName()))
             return;
 
         Enderchester.getInstance().getMorePaperLib().scheduling().regionSpecificScheduler(p.getLocation()).run(() -> {

@@ -1,3 +1,4 @@
+import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 import java.time.Instant
 
 plugins {
@@ -123,6 +124,13 @@ bukkit { // Options: https://github.com/Minecrell/plugin-yml#bukkit
     load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.POSTWORLD // STARTUP or POSTWORLD
     depend = listOf()
     softDepend = listOf()
+
+    permissions {
+        register("enderchester.use") {
+            description = "Allows you to open ender chests by hand or through your inventory"
+            default = BukkitPluginDescription.Permission.Default.TRUE;
+        }
+    }
 }
 
 // Apply custom version arg
