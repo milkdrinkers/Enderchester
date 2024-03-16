@@ -1,7 +1,9 @@
 package io.github.milkdrinkers.enderchester.listener;
 
 import io.github.milkdrinkers.enderchester.Enderchester;
+import io.github.milkdrinkers.enderchester.utility.Cfg;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -69,6 +71,8 @@ public class EnderChestListener implements Listener {
         Enderchester.getInstance().getMorePaperLib().scheduling().regionSpecificScheduler(p.getLocation()).run(() -> {
 //            p.openInventory(new EnderchesterInventory(Enderchester.getInstance(), p).getInventory());
             p.openInventory(p.getEnderChest());
+            if (Cfg.get().getOrDefault("sound.opening", true))
+                p.playSound(p.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1.0f, 1.0f);
         });
     }
 

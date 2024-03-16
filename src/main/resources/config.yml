@@ -1,1 +1,3 @@
-# This is empty for now, sorry :)
+sound:
+  # Should a ender chest opening sound be played when it is opened through the plugin?
+  opening: true
