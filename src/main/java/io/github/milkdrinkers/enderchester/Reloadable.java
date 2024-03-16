@@ -1,4 +1,4 @@
-package io.github.exampleuser.exampleplugin;
+package io.github.milkdrinkers.enderchester;
 
 /**
  * Implemented in classes that should support being reloaded IE executing the methods during runtime after startup.

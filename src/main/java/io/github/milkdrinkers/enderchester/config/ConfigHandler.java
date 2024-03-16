@@ -1,7 +1,7 @@
-package io.github.exampleuser.exampleplugin.config;
+package io.github.milkdrinkers.enderchester.config;
 
-import io.github.exampleuser.exampleplugin.ExamplePlugin;
-import io.github.exampleuser.exampleplugin.Reloadable;
+import io.github.milkdrinkers.enderchester.Enderchester;
+import io.github.milkdrinkers.enderchester.Reloadable;
 import com.github.milkdrinkers.Crate.Config;
 
 import javax.inject.Singleton;
@@ -11,7 +11,7 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class ConfigHandler implements Reloadable {
-    private final ExamplePlugin plugin;
+    private final Enderchester plugin;
     private Config cfg;
 
     /**
@@ -19,7 +19,7 @@ public class ConfigHandler implements Reloadable {
      *
      * @param plugin the plugin instance
      */
-    public ConfigHandler(ExamplePlugin plugin) {
+    public ConfigHandler(Enderchester plugin) {
         this.plugin = plugin;
     }
 

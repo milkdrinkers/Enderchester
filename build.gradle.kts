@@ -6,7 +6,6 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1" // Shades and relocates dependencies, See https://imperceptiblethoughts.com/shadow/introduction/
     id("xyz.jpenilla.run-paper") version "2.2.3" // Adds runServer and runMojangMappedServer tasks for testing
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0" // Automatic plugin.yml generation
-//    id("io.papermc.paperweight.userdev") version "1.5.9" // Used to develop internal plugins using Mojang mappings, See https://github.com/PaperMC/paperweight
 
     eclipse
     idea
@@ -32,7 +31,6 @@ repositories {
     maven("https://jitpack.io/") {
         content {
             includeGroup("com.github.milkdrinkers")
-            includeGroup("com.github.MilkBowl")
         }
     }
 }
@@ -41,7 +39,6 @@ dependencies {
     compileOnly("org.jetbrains:annotations:24.1.0")
     annotationProcessor("org.jetbrains:annotations:24.1.0")
 
-    //paperweight.paperDevBundle("1.20.2-R0.1-SNAPSHOT") // Use instead of the `paper-api` entry if developing plugins using Mojang mappings
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
     implementation("space.arim.morepaperlib:morepaperlib:latest.release")
 
@@ -49,21 +46,9 @@ dependencies {
     implementation("com.github.milkdrinkers:colorparser:2.0.0") {
         exclude("net.kyori")
     }
-
-    implementation("dev.jorel:commandapi-bukkit-shade:9.3.0")
-
-    implementation("dev.triumphteam:triumph-gui:3.1.7") {
-        exclude("net.kyori")
-    }
-    compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
 }
 
 tasks {
-    // NOTE: Use when developing plugins using Mojang mappings
-//    assemble {
-//        dependsOn(reobfJar)
-//    }
-
     build {
         dependsOn(shadowJar)
     }
@@ -101,8 +86,6 @@ tasks {
         reloc("space.arim.morepaperlib", "morepaperlib")
         reloc("com.github.milkdrinkers.Crate", "crate")
         reloc("com.github.milkdrinkers.colorparser", "colorparser")
-        reloc("dev.jorel.commandapi", "commandapi")
-        reloc("dev.triumphteam.gui", "gui")
 
         minimize()
     }

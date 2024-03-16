@@ -1,7 +1,7 @@
-package io.github.exampleuser.exampleplugin.utility;
+package io.github.milkdrinkers.enderchester.utility;
 
-import io.github.exampleuser.exampleplugin.ExamplePlugin;
-import io.github.exampleuser.exampleplugin.config.ConfigHandler;
+import io.github.milkdrinkers.enderchester.Enderchester;
+import io.github.milkdrinkers.enderchester.config.ConfigHandler;
 import com.github.milkdrinkers.Crate.Config;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,6 +16,6 @@ public abstract class Cfg {
      */
     @NotNull
     public static Config get() {
-        return ExamplePlugin.getInstance().getConfigHandler().getConfig();
+        return Enderchester.getInstance().getConfigHandler().getConfig();
     }
 }
