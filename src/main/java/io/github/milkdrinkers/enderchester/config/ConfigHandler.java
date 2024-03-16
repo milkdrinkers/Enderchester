@@ -1,8 +1,8 @@
 package io.github.milkdrinkers.enderchester.config;
 
+import com.github.milkdrinkers.Crate.Config;
 import io.github.milkdrinkers.enderchester.Enderchester;
 import io.github.milkdrinkers.enderchester.Reloadable;
-import com.github.milkdrinkers.Crate.Config;
 
 import javax.inject.Singleton;
 

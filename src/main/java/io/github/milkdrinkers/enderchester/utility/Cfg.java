@@ -1,8 +1,8 @@
 package io.github.milkdrinkers.enderchester.utility;
 
+import com.github.milkdrinkers.Crate.Config;
 import io.github.milkdrinkers.enderchester.Enderchester;
 import io.github.milkdrinkers.enderchester.config.ConfigHandler;
-import com.github.milkdrinkers.Crate.Config;
 import org.jetbrains.annotations.NotNull;
 
 /**

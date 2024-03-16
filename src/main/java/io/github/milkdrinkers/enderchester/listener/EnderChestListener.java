@@ -12,7 +12,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -79,32 +78,9 @@ public class EnderChestListener implements Listener {
             return;
 
         Enderchester.getInstance().getMorePaperLib().scheduling().regionSpecificScheduler(p.getLocation()).run(() -> {
-//            p.openInventory(new EnderchesterInventory(Enderchester.getInstance(), p).getInventory());
             p.openInventory(p.getEnderChest());
             if (Cfg.get().getOrDefault("sound.opening", true))
                 p.playSound(p.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1.0f, 1.0f);
         });
-    }
-
-    //
-    /**
-     * Handles saving of custom ender chest inventory to main enderchest on close
-     *
-     * @param e the e
-     */
-    @EventHandler
-    public void onInventoryClose(InventoryCloseEvent e) {
-        /*if (!e.getInventory().getType().equals(InventoryType.ENDER_CHEST))
-            return;
-
-        if (!e.getReason().equals(InventoryCloseEvent.Reason.PLAYER))
-            return;
-
-        if (!(e.getPlayer() instanceof Player p))
-            return;
-
-        if (e.getInventory().getHolder() instanceof EnderchesterInventory) {
-            p.getEnderChest().setContents(e.getInventory().getContents());
-        }*/
     }
 }
