@@ -6,6 +6,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -40,8 +41,8 @@ public class EnderChestListener implements Listener {
         if (item == null)
             return;
 
-        openEnderChest(p, item);
-        e.setCancelled(true);
+        if (openEnderChest(p, item))
+            e.setCancelled(true);
     }
 
     /**
@@ -60,27 +61,29 @@ public class EnderChestListener implements Listener {
         if (item == null)
             return;
 
-        openEnderChest(p, item);
-        e.setCancelled(true);
+        if (openEnderChest(p, item))
+            e.setCancelled(true);
     }
 
-    private void openEnderChest(Player p, ItemStack item) {
+    private boolean openEnderChest(Player p, ItemStack item) {
         if (!item.getType().equals(Material.ENDER_CHEST))
-            return;
+            return false;
 
         if (Cfg.get().getOrDefault("check.permission", true) && !p.hasPermission("enderchester.use"))
-            return;
+            return false;
 
         if (Cfg.get().getOrDefault("check.creative", false) && p.getGameMode().equals(GameMode.CREATIVE))
-            return;
+            return false;
 
         if (Cfg.get().getOrDefault("check.blacklist.enabled", false) && Cfg.get().getStringList("check.blacklist.worlds").contains(p.getWorld().getName()))
-            return;
+            return false;
 
         Enderchester.getInstance().getMorePaperLib().scheduling().regionSpecificScheduler(p.getLocation()).run(() -> {
             p.openInventory(p.getEnderChest());
             if (Cfg.get().getOrDefault("sound.opening", true))
                 p.playSound(p.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1.0f, 1.0f);
         });
+
+        return true;
     }
 }
