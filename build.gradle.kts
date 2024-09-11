@@ -4,8 +4,8 @@ import java.time.Instant
 plugins {
     `java-library`
 
-    id("com.github.johnrengelman.shadow") version "8.1.1" // Shades and relocates dependencies, See https://imperceptiblethoughts.com/shadow/introduction/
-    id("xyz.jpenilla.run-paper") version "2.3.0" // Adds runServer and runMojangMappedServer tasks for testing
+    id("io.github.goooler.shadow") version "8.1.8" // Shades and relocates dependencies, See https://imperceptiblethoughts.com/shadow/introduction/
+    id("xyz.jpenilla.run-paper") version "2.3.1" // Adds runServer and runMojangMappedServer tasks for testing
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0" // Automatic plugin.yml generation
 
     eclipse
@@ -18,7 +18,7 @@ description = ""
 val mainPackage = "${project.group}.${rootProject.name.lowercase()}"
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17)) // Configure the java toolchain. This allows gradle to auto-provision JDK 17 on systems that only have JDK 8 installed for example.
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21)) // Configure the java toolchain. This allows gradle to auto-provision JDK 17 on systems that only have JDK 8 installed for example.
     withJavadocJar() // Enable Javadoc generation
     withSourcesJar()
 }
@@ -59,7 +59,7 @@ tasks {
 
         // Set the release flag. This configures what version bytecode the compiler will emit, as well as what JDK APIs are usable.
         // See https://openjdk.java.net/jeps/247 for more information.
-        options.release.set(17)
+        options.release.set(21)
         options.compilerArgs.addAll(arrayListOf("-Xlint:all", "-Xlint:-processing", "-Xdiags:verbose"))
     }
 
@@ -118,7 +118,7 @@ bukkit { // Options: https://github.com/Minecrell/plugin-yml#bukkit
     description = "${project.description}"
     authors = listOf("darksaid98")
     contributors = listOf()
-    apiVersion = "1.19"
+    apiVersion = "1.21"
 
     // Misc properties
     load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.POSTWORLD // STARTUP or POSTWORLD
