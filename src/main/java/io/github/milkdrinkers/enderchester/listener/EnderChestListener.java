@@ -1,12 +1,14 @@
 package io.github.milkdrinkers.enderchester.listener;
 
 import io.github.milkdrinkers.enderchester.Enderchester;
+import io.github.milkdrinkers.enderchester.api.event.EnderchestOpenedEvent;
+import io.github.milkdrinkers.enderchester.api.event.PreEnderchestOpenedEvent;
+import io.github.milkdrinkers.enderchester.api.type.OpenMethod;
 import io.github.milkdrinkers.enderchester.utility.Cfg;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -26,6 +28,7 @@ public class EnderChestListener implements Listener {
      *
      * @param e the e
      */
+    @SuppressWarnings("unused")
     @EventHandler(priority = EventPriority.LOW)
     public void onInteract(InventoryClickEvent e) {
         if (!e.getClick().equals(ClickType.RIGHT))
@@ -41,7 +44,7 @@ public class EnderChestListener implements Listener {
         if (item == null)
             return;
 
-        if (openEnderChest(p, item))
+        if (openEnderChest(p, item, OpenMethod.INVENTORY))
             e.setCancelled(true);
     }
 
@@ -50,6 +53,7 @@ public class EnderChestListener implements Listener {
      *
      * @param e the e
      */
+    @SuppressWarnings("unused")
     @EventHandler
     public void onRightClick(PlayerInteractEvent e) {
         if (!e.getAction().equals(Action.RIGHT_CLICK_AIR))
@@ -61,11 +65,11 @@ public class EnderChestListener implements Listener {
         if (item == null)
             return;
 
-        if (openEnderChest(p, item))
+        if (openEnderChest(p, item, OpenMethod.HOTBAR))
             e.setCancelled(true);
     }
 
-    private boolean openEnderChest(Player p, ItemStack item) {
+    private boolean openEnderChest(Player p, ItemStack item, OpenMethod openMethod) {
         if (!item.getType().equals(Material.ENDER_CHEST))
             return false;
 
@@ -79,9 +83,15 @@ public class EnderChestListener implements Listener {
             return false;
 
         Enderchester.getInstance().getMorePaperLib().scheduling().regionSpecificScheduler(p.getLocation()).run(() -> {
+            final boolean eventCall = new PreEnderchestOpenedEvent(p, openMethod).callEvent();
+            if (!eventCall)
+                return;
+
             p.openInventory(p.getEnderChest());
             if (Cfg.get().getOrDefault("sound.opening", true))
                 p.playSound(p.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1.0f, 1.0f);
+
+            new EnderchestOpenedEvent(p, openMethod).callEvent();
         });
 
         return true;
