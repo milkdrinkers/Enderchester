@@ -1,6 +1,6 @@
 package io.github.milkdrinkers.enderchester.config;
 
-import com.github.milkdrinkers.Crate.Config;
+import com.github.milkdrinkers.crate.Config;
 import io.github.milkdrinkers.enderchester.Enderchester;
 import io.github.milkdrinkers.enderchester.Reloadable;
 

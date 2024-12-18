@@ -1,0 +1,22 @@
+[versions]
+crate = "2.1.0"
+
+[libraries]
+# Core dependencies
+annotations = "org.jetbrains:annotations:26.0.1"
+paper-api = "io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT"
+morepaperlib = "space.arim.morepaperlib:morepaperlib:0.4.4"
+
+# API dependencies
+crate-api = { module = "com.github.milkdrinkers:crate-api", version.ref = "crate" }
+crate-yaml = { module = "com.github.milkdrinkers:crate-yaml", version.ref = "crate" }
+colorparser = "com.github.milkdrinkers:colorparser:2.0.3"
+
+# Plugin dependencies
+bstats = "org.bstats:bstats-bukkit:3.1.0"
+vault = "com.github.MilkBowl:VaultAPI:1.7.1"
+
+[plugins]
+shadow = "com.gradleup.shadow:8.3.5"
+run-paper = "xyz.jpenilla.run-paper:2.3.1"
+plugin-yml = "net.minecrell.plugin-yml.bukkit:0.6.0"

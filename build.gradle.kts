@@ -4,18 +4,16 @@ import java.time.Instant
 plugins {
     `java-library`
 
-    id("io.github.goooler.shadow") version "8.1.8" // Shades and relocates dependencies, See https://imperceptiblethoughts.com/shadow/introduction/
-    id("xyz.jpenilla.run-paper") version "2.3.1" // Adds runServer and runMojangMappedServer tasks for testing
-    id("net.minecrell.plugin-yml.bukkit") version "0.6.0" // Automatic plugin.yml generation
+    alias(libs.plugins.shadow) // Shades and relocates dependencies, see https://gradleup.com/shadow/
+    alias(libs.plugins.run.paper) // Built in test server using runServer and runMojangMappedServer tasks
+    alias(libs.plugins.plugin.yml) // Automatic plugin.yml generation
 
     eclipse
     idea
 }
 
-group = "io.github.milkdrinkers"
-version = "1.0.0"
-description = ""
 val mainPackage = "${project.group}.${rootProject.name.lowercase()}"
+applyCustomVersion()
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21)) // Configure the java toolchain. This allows gradle to auto-provision JDK 17 on systems that only have JDK 8 installed for example.
@@ -29,24 +27,31 @@ repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://mvn-repo.arim.space/lesser-gpl3/")
 
+    maven("https://maven.athyrium.eu/releases")
+
     maven("https://jitpack.io/") {
         content {
-            includeGroup("com.github.milkdrinkers")
+            includeGroup("com.github.MilkBowl")
         }
     }
 }
 
 dependencies {
-    compileOnly("org.jetbrains:annotations:26.0.1")
-    annotationProcessor("org.jetbrains:annotations:26.0.1")
+    // Core dependencies
+    compileOnly(libs.annotations)
+    annotationProcessor(libs.annotations)
+    compileOnly(libs.paper.api)
+    implementation(libs.morepaperlib)
 
-    compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
-    implementation("space.arim.morepaperlib:morepaperlib:latest.release")
-
-    implementation("com.github.milkdrinkers:crate:1.2.1")
-    implementation("com.github.milkdrinkers:colorparser:2.0.3") {
+    // API
+    implementation(libs.crate.api)
+    implementation(libs.crate.yaml)
+    implementation(libs.colorparser) {
         exclude("net.kyori")
     }
+
+    // Plugin dependencies
+    implementation(libs.bstats)
 }
 
 tasks {
@@ -55,26 +60,22 @@ tasks {
     }
 
     compileJava {
-        options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
-
-        // Set the release flag. This configures what version bytecode the compiler will emit, as well as what JDK APIs are usable.
-        // See https://openjdk.java.net/jeps/247 for more information.
+        options.encoding = Charsets.UTF_8.name()
         options.release.set(21)
         options.compilerArgs.addAll(arrayListOf("-Xlint:all", "-Xlint:-processing", "-Xdiags:verbose"))
     }
 
     javadoc {
         isFailOnError = false
-        exclude("${mainPackage.replace(".", "/")}/db/schema/**") // Exclude generated jOOQ sources from javadocs
         val options = options as StandardJavadocDocletOptions
-        options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
+        options.encoding = Charsets.UTF_8.name()
         options.overview = "src/main/javadoc/overview.html"
         options.tags("apiNote:a:API Note:", "implNote:a:Implementation Note:", "implSpec:a:Implementation Requirements:")
         options.use()
     }
 
     processResources {
-        filteringCharset = Charsets.UTF_8.name() // We want UTF-8 for everything
+        filteringCharset = Charsets.UTF_8.name()
     }
 
     shadowJar {
@@ -85,8 +86,9 @@ tasks {
         fun reloc(originPkg: String, targetPkg: String) = relocate(originPkg, "${mainPackage}.lib.${targetPkg}")
 
         reloc("space.arim.morepaperlib", "morepaperlib")
-        reloc("com.github.milkdrinkers.Crate", "crate")
+        reloc("com.github.milkdrinkers.crate", "crate")
         reloc("com.github.milkdrinkers.colorparser", "colorparser")
+        reloc("org.bstats", "bstats")
 
         minimize()
     }
@@ -118,7 +120,7 @@ bukkit { // Options: https://github.com/Minecrell/plugin-yml#bukkit
     description = "${project.description}"
     authors = listOf("darksaid98")
     contributors = listOf()
-    apiVersion = "1.21"
+    apiVersion = "1.19"
 
     // Misc properties
     load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.POSTWORLD // STARTUP or POSTWORLD
@@ -133,14 +135,10 @@ bukkit { // Options: https://github.com/Minecrell/plugin-yml#bukkit
     }
 }
 
-// Apply custom version arg
-val versionArg = if (hasProperty("customVersion"))
-    (properties["customVersion"] as String).uppercase() // Uppercase version string
-else
-    "${project.version}-SNAPSHOT-${Instant.now().epochSecond}" // Append snapshot to version
+fun applyCustomVersion() {
+    // Apply custom version arg or append snapshot version
+    val ver = properties["altVer"]?.toString() ?: "${rootProject.version}-SNAPSHOT-${Instant.now().epochSecond}"
 
-// Strip prefixed "v" from version tag
-project.version = if (versionArg.first().equals('v', true))
-    versionArg.substring(1)
-else
-    versionArg.uppercase()
+    // Strip prefixed "v" from version tag
+    rootProject.version = (if (ver.first().equals('v', true)) ver.substring(1) else ver.uppercase()).uppercase()
+}
