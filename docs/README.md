@@ -31,6 +31,8 @@ This plugin is a tiny quality of life addition to Minecraft. It allows players t
 - Supports Minecraft 1.19+ (_The plugin is tiny and is unlikely to break due to Minecraft updates_)
 - Developer API
 
+<img src="assets/example.gif" alt="example gif">
+
 ---
 
 ## 📦 Downloads
