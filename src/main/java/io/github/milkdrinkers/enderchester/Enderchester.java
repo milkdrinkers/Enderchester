@@ -1,6 +1,7 @@
 package io.github.milkdrinkers.enderchester;
 
 import io.github.milkdrinkers.enderchester.config.ConfigHandler;
+import io.github.milkdrinkers.enderchester.hook.BStatsHook;
 import io.github.milkdrinkers.enderchester.listener.ListenerHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +15,9 @@ public class Enderchester extends JavaPlugin {
     private MorePaperLib morePaperLib;
     private ConfigHandler configHandler;
     private ListenerHandler listenerHandler;
+
+    // Hooks
+    private static BStatsHook bStatsHook;
 
     /**
      * Gets plugin instance.
@@ -33,18 +37,21 @@ public class Enderchester extends JavaPlugin {
 
         configHandler.onLoad();
         listenerHandler.onLoad();
+        bStatsHook.onLoad();
     }
 
     @Override
     public void onEnable() {
         configHandler.onEnable();
         listenerHandler.onEnable();
+        bStatsHook.onEnable();
     }
 
     @Override
     public void onDisable() {
         configHandler.onDisable();
         listenerHandler.onDisable();
+        bStatsHook.onDisable();
     }
 
     /**
