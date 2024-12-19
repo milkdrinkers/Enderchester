@@ -1,11 +1,20 @@
 check:
-  # Should we check the player for "enderchester.use"
+  # Should we check the player for the permission "enderchester.use"
   permission: true
-  # Should we disallow opening ender chests in creative mode?
+
+  # Should we disallow opening enderchests through the plugin when in creative mode?
   creative: false
-  # A list of worldnames, players won't be able to open ender chests through inventory or by holding them in hand here
+
+  # A list of worldnames where players won't be able to open enderchests through the plugin
   blacklist:
-    enabled: false
+    enabled: false # Whether the blacklist should be used or not
+    worlds:
+      - worldname1
+      - someworldname2
+
+  # A list of worldnames where players will be able to open enderchests through the plugin
+  whitelist:
+    enabled: false # Whether the whitelist should be used or not
     worlds:
       - worldname1
       - someworldname2

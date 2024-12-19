@@ -82,6 +82,9 @@ public class EnderChestListener implements Listener {
         if (Cfg.get().getOrDefault("check.blacklist.enabled", false) && Cfg.get().getStringList("check.blacklist.worlds").contains(p.getWorld().getName()))
             return false;
 
+        if (Cfg.get().getOrDefault("check.whitelist.enabled", false) && !Cfg.get().getStringList("check.whitelist.worlds").contains(p.getWorld().getName()))
+            return false;
+
         Enderchester.getInstance().getMorePaperLib().scheduling().regionSpecificScheduler(p.getLocation()).run(() -> {
             final boolean eventCall = new PreEnderchestOpenedEvent(p, openMethod).callEvent();
             if (!eventCall)
