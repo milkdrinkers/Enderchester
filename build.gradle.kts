@@ -70,7 +70,9 @@ tasks {
         val options = options as StandardJavadocDocletOptions
         options.encoding = Charsets.UTF_8.name()
         options.overview = "src/main/javadoc/overview.html"
+        options.windowTitle = "${rootProject.name} Javadoc"
         options.tags("apiNote:a:API Note:", "implNote:a:Implementation Note:", "implSpec:a:Implementation Requirements:")
+        options.addStringOption("Xdoclint:none", "-quiet")
         options.use()
     }
 
