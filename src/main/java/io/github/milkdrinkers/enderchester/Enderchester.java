@@ -34,6 +34,7 @@ public class Enderchester extends JavaPlugin {
         morePaperLib = new MorePaperLib(instance);
         configHandler = new ConfigHandler(instance);
         listenerHandler = new ListenerHandler(instance);
+        bStatsHook = new BStatsHook(instance);
 
         configHandler.onLoad();
         listenerHandler.onLoad();
