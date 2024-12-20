@@ -40,14 +40,14 @@ This plugin is a tiny quality of life addition to Minecraft. It allows players t
 <a href="https://github.com/milkdrinkers/Enderchester/releases/latest">
     <img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/github/downloads/milkdrinkers/Enderchester/total?style=for-the-badge&logo=github&logoColor=white&labelColor=141417">
 </a>
-<a href="https://www.spigotmc.org/">
-    <img alt="Spiget Downloads" src="https://img.shields.io/spiget/downloads/9089?style=for-the-badge&logo=spigotmc&logoColor=white&label=SPIGOT&labelColor=141417">
+<a href="https://www.spigotmc.org/resources/121384/">
+    <img alt="Spiget Downloads" src="https://img.shields.io/spiget/downloads/121384?style=for-the-badge&logo=spigotmc&logoColor=white&label=SPIGOT&labelColor=141417">
 </a>
-<a href="https://modrinth.com/">
-    <img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/essentialsx?style=for-the-badge&logo=modrinth&logoColor=white&label=MODRINTH&labelColor=141417">
+<a href="https://modrinth.com/plugin/enderchester/">
+    <img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/enderchester?style=for-the-badge&logo=modrinth&logoColor=white&label=MODRINTH&labelColor=141417">
 </a>
-<a href="https://hangar.papermc.io/">
-    <img alt="Hangar Downloads" src="https://img.shields.io/hangar/dt/Essentials?style=for-the-badge&label=HANGAR&labelColor=141417">
+<a href="https://hangar.papermc.io/darksaid98/Enderchester/">
+    <img alt="Hangar Downloads" src="https://img.shields.io/hangar/dt/Enderchester?style=for-the-badge&label=HANGAR&labelColor=141417">
 </a>
 
 ### Stable Releases
