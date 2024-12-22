@@ -130,3 +130,7 @@ You can find the license the source code and all assets are under [here](../LICE
 ## ❤️ Acknowledgments
 
 - **[Artillex-Studios:](https://github.com/Artillex-Studios)** _For their excellent plugin [__AxShulkers__](https://github.com/Artillex-Studios/AxShulkers/), which this was inspired by. I highly recommend their plugin providing excellent QoL features for shulkers._
+
+---
+
+![Project Usage](https://bstats.org/signatures/bukkit/Enderchester.svg)
