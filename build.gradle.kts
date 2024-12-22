@@ -4,6 +4,7 @@ import java.time.Instant
 plugins {
     `java-library`
 
+    alias(libs.plugins.maven.deployer)
     alias(libs.plugins.shadow) // Shades and relocates dependencies, see https://gradleup.com/shadow/
     alias(libs.plugins.run.paper) // Built in test server using runServer and runMojangMappedServer tasks
     alias(libs.plugins.plugin.yml) // Automatic plugin.yml generation
@@ -140,6 +141,57 @@ bukkit { // Options: https://github.com/Minecrell/plugin-yml#bukkit
             description = "Allows you to open ender chests by hand or through your inventory"
             default = BukkitPluginDescription.Permission.Default.TRUE;
         }
+    }
+}
+
+deployer {
+    release {
+        version.set("${rootProject.version}")
+        description.set(rootProject.description.orEmpty())
+    }
+
+    projectInfo {
+        groupId = "io.github.milkdrinkers"
+        artifactId = "enderchester"
+        version = "${rootProject.version}"
+
+        name = rootProject.name
+        description = rootProject.description.orEmpty()
+        url = "https://github.com/milkdrinkers/Enderchester"
+
+        scm {
+            connection = "scm:git:git://github.com/milkdrinkers/Enderchester.git"
+            developerConnection = "scm:git:ssh://github.com:milkdrinkers/Enderchester.git"
+            url = "https://github.com/milkdrinkers/Enderchester"
+        }
+
+        license({
+            name = "GNU General Public License Version 3"
+            url = "https://www.gnu.org/licenses/gpl-3.0.en.html#license-text"
+        })
+
+        developer({
+            name.set("darksaid98")
+            email.set("darksaid9889@gmail.com")
+            url.set("https://github.com/darksaid98")
+            organization.set("Milkdrinkers")
+        })
+    }
+
+    content {
+        component {
+            fromJava()
+        }
+    }
+
+    centralPortalSpec {
+        auth.user.set(secret("MAVEN_USERNAME"))
+        auth.password.set(secret("MAVEN_PASSWORD"))
+    }
+
+    signing {
+        key.set(secret("GPG_KEY"))
+        password.set(secret("GPG_PASSWORD"))
     }
 }
 
