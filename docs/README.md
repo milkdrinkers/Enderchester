@@ -74,22 +74,18 @@ Making your issue easy to read and follow will usually result in it being handle
 
 ## 🚧 API
 
-<a href="https://jitpack.io/com/github/milkdrinkers/Enderchester/latest/javadoc/">
+<a href="https://javadoc.io/doc/io.github.milkdrinkers/enderchester">
     <img alt="Javadoc" src="https://img.shields.io/badge/JAVADOC-8A2BE2?style=for-the-badge&labelColor=141417">
 </a>
 
-We provide API for developers accessible through [JitPack](https://jitpack.io/). 
+We provide API for developers accessible on [Maven Central Repository](https://central.sonatype.com/artifact/io.github.milkdrinkers/enderchester). 
 
 <details>
 <summary>Gradle Kotlin DSL</summary>
 
 ```kotlin
 repositories {
-    maven("https://jitpack.io") {
-        content {
-            includeGroup("io.github.milkdrinkers")
-        }
-    }
+    mavenCentral()
 }
 
 dependencies {
@@ -103,13 +99,6 @@ dependencies {
 
 ```xml
 <project>
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>io.github.milkdrinkers</groupId>
