@@ -22,3 +22,4 @@ check:
 sound:
   # Should a ender chest opening sound be played when it is opened through the plugin?
   opening: true
+  volume: 1.0 # Can be any value between 0 and 1. For example, 0.8 would be at 80% volume.

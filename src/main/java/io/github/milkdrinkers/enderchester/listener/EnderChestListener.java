@@ -93,7 +93,7 @@ public class EnderChestListener implements Listener {
 
             p.openInventory(p.getEnderChest());
             if (Cfg.get().getOrDefault("sound.opening", true))
-                p.playSound(p.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                p.playSound(p.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, SoundCategory.BLOCKS, Cfg.get().getOrDefault("sound.volume", 1.0f), 1.0f);
 
             new EnderchestOpenedEvent(p, openMethod).callEvent();
         });
