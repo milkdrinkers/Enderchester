@@ -5,9 +5,9 @@ import io.github.milkdrinkers.enderchester.api.event.EnderchestOpenedEvent;
 import io.github.milkdrinkers.enderchester.api.event.PreEnderchestOpenedEvent;
 import io.github.milkdrinkers.enderchester.api.type.OpenMethod;
 import io.github.milkdrinkers.enderchester.utility.Cfg;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import io.github.milkdrinkers.enderchester.utility.Logger;
+import net.kyori.adventure.key.Key;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -91,8 +91,18 @@ public class EnderChestListener implements Listener {
                 return;
 
             p.openInventory(p.getEnderChest());
-            if (Cfg.get().getOrDefault("sound.opening", true))
-                p.playSound(p.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1.0f, 1.0f);
+            if (Cfg.get().getOrDefault("sound.opening", true)) {
+                Sound sound;
+                if (Cfg.get().getString("sound.effect") != null &&
+                    !Cfg.get().getString("sound.effect").isBlank() &&
+                    Registry.SOUNDS.get(NamespacedKey.minecraft(Cfg.get().getString("sound.effect"))) != null) {
+                    sound = Registry.SOUNDS.get(NamespacedKey.minecraft(Cfg.get().getString("sound.effect")));
+                } else {
+                    sound = Sound.BLOCK_ENDER_CHEST_OPEN;
+                }
+
+                p.playSound(p.getLocation(), sound, SoundCategory.BLOCKS, Cfg.get().getOrDefault("sound.volume", 1.0f), 1.0f);
+            }
 
             new EnderchestOpenedEvent(p, openMethod).callEvent();
         });
