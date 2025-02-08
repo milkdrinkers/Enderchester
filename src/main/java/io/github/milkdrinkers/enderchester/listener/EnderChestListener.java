@@ -5,9 +5,10 @@ import io.github.milkdrinkers.enderchester.api.event.EnderchestOpenedEvent;
 import io.github.milkdrinkers.enderchester.api.event.PreEnderchestOpenedEvent;
 import io.github.milkdrinkers.enderchester.api.type.OpenMethod;
 import io.github.milkdrinkers.enderchester.utility.Cfg;
-import io.github.milkdrinkers.enderchester.utility.Logger;
 import net.kyori.adventure.key.Key;
-import org.bukkit.*;
+import net.kyori.adventure.sound.Sound;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -92,16 +93,18 @@ public class EnderChestListener implements Listener {
 
             p.openInventory(p.getEnderChest());
             if (Cfg.get().getOrDefault("sound.opening", true)) {
-                Sound sound;
-                if (Cfg.get().getString("sound.effect") != null &&
-                    !Cfg.get().getString("sound.effect").isBlank() &&
-                    Registry.SOUNDS.get(NamespacedKey.minecraft(Cfg.get().getString("sound.effect"))) != null) {
-                    sound = Registry.SOUNDS.get(NamespacedKey.minecraft(Cfg.get().getString("sound.effect")));
-                } else {
-                    sound = Sound.BLOCK_ENDER_CHEST_OPEN;
-                }
+                try {
+                    final String soundId = Cfg.get().getOrDefault("sound.effect", "minecraft:block.ender_chest.open");
+                    final Sound sound = Sound.sound()
+                        .type(Key.key(soundId))
+                        .source(Sound.Source.BLOCK)
+                        .volume(Cfg.get().getOrDefault("sound.volume", 1.0f))
+                        .pitch(1.0f)
+                        .build();
 
-                p.playSound(p.getLocation(), sound, SoundCategory.BLOCKS, Cfg.get().getOrDefault("sound.volume", 1.0f), 1.0f);
+                    p.playSound(sound);
+                } catch (RuntimeException ignored) {
+                }
             }
 
             new EnderchestOpenedEvent(p, openMethod).callEvent();
