@@ -10,7 +10,7 @@ morepaperlib = "space.arim.morepaperlib:morepaperlib:0.4.4"
 # API dependencies
 crate-api = { module = "com.github.milkdrinkers:crate-api", version.ref = "crate" }
 crate-yaml = { module = "com.github.milkdrinkers:crate-yaml", version.ref = "crate" }
-colorparser = "com.github.milkdrinkers:colorparser:2.0.3"
+colorparser = "com.github.milkdrinkers:colorparser:3.0.1"
 
 # Plugin dependencies
 bstats = "org.bstats:bstats-bukkit:3.1.0"
