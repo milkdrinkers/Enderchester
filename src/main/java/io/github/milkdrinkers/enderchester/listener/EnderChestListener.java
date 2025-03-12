@@ -4,7 +4,7 @@ import io.github.milkdrinkers.enderchester.Enderchester;
 import io.github.milkdrinkers.enderchester.api.event.EnderchestOpenedEvent;
 import io.github.milkdrinkers.enderchester.api.event.PreEnderchestOpenedEvent;
 import io.github.milkdrinkers.enderchester.api.type.OpenMethod;
-import io.github.milkdrinkers.enderchester.utility.Cfg;
+import io.github.milkdrinkers.enderchester.config.EnderChesterConfig;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.GameMode;
@@ -19,11 +19,18 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.intellij.lang.annotations.Subst;
 
 /**
  * The type Ender chest listener.
  */
 public class EnderChestListener implements Listener {
+    private final EnderChesterConfig config;
+
+    public EnderChestListener(EnderChesterConfig config) {
+        this.config = config;
+    }
+
     /**
      * Handles opening of ender chest through clicking the item in an inventory.
      *
@@ -74,16 +81,16 @@ public class EnderChestListener implements Listener {
         if (!item.getType().equals(Material.ENDER_CHEST))
             return false;
 
-        if (Cfg.get().getOrDefault("check.permission", true) && !p.hasPermission("enderchester.use"))
+        if (config.check.permission && !p.hasPermission("enderchester.use"))
             return false;
 
-        if (Cfg.get().getOrDefault("check.creative", false) && p.getGameMode().equals(GameMode.CREATIVE))
+        if (config.check.creative && p.getGameMode().equals(GameMode.CREATIVE))
             return false;
 
-        if (Cfg.get().getOrDefault("check.blacklist.enabled", false) && Cfg.get().getStringList("check.blacklist.worlds").contains(p.getWorld().getName()))
+        if (config.check.blacklist.enabled && config.check.blacklist.worlds.contains(p.getWorld().getName()))
             return false;
 
-        if (Cfg.get().getOrDefault("check.whitelist.enabled", false) && !Cfg.get().getStringList("check.whitelist.worlds").contains(p.getWorld().getName()))
+        if (config.check.whitelist.enabled && !config.check.whitelist.worlds.contains(p.getWorld().getName()))
             return false;
 
         Enderchester.getInstance().getMorePaperLib().scheduling().regionSpecificScheduler(p.getLocation()).run(() -> {
@@ -92,13 +99,13 @@ public class EnderChestListener implements Listener {
                 return;
 
             p.openInventory(p.getEnderChest());
-            if (Cfg.get().getOrDefault("sound.opening", true)) {
+            if (config.sound.opening) {
                 try {
-                    final String soundId = Cfg.get().getOrDefault("sound.effect", "minecraft:block.ender_chest.open");
+                    @Subst("minecraft:block.ender_chest.open") final String soundId = config.sound.effect;
                     final Sound sound = Sound.sound()
                         .type(Key.key(soundId))
                         .source(Sound.Source.BLOCK)
-                        .volume(Cfg.get().getOrDefault("sound.volume", 1.0f))
+                        .volume(config.sound.volume)
                         .pitch(1.0f)
                         .build();
 

@@ -44,6 +44,7 @@ public class BStatsHook implements Hook {
 
     /**
      * Check if the BStats hook is loaded and ready for use.
+     *
      * @return whether the BStats metrics hook is loaded or not
      */
     public boolean isHookLoaded() {

@@ -35,6 +35,8 @@ repositories {
             includeGroup("com.github.MilkBowl")
         }
     }
+
+    maven("https://repo.opencollab.dev/main/")
 }
 
 dependencies {
@@ -45,11 +47,13 @@ dependencies {
     implementation(libs.morepaperlib)
 
     // API
-    implementation(libs.crate.api)
-    implementation(libs.crate.yaml)
-    implementation(libs.colorparser) {
-        exclude("net.kyori")
-    }
+    api(libs.yaml)
+    annotationProcessor(libs.configurate.`interface`.ap)
+    api(libs.configurate.`interface`)
+    implementation(libs.configurate.yaml)
+//    implementation(libs.colorparser) {
+//        exclude("net.kyori")
+//    }
 
     // Plugin dependencies
     implementation(libs.bstats)
@@ -89,8 +93,10 @@ tasks {
         fun reloc(originPkg: String, targetPkg: String) = relocate(originPkg, "${mainPackage}.lib.${targetPkg}")
 
         reloc("space.arim.morepaperlib", "morepaperlib")
-        reloc("com.github.milkdrinkers.crate", "crate")
-        reloc("com.github.milkdrinkers.colorparser", "colorparser")
+        reloc("org.spongepowered.configurate", "configurate")
+        reloc("org.yaml.snakeyaml", "snakeyaml") // Configurate dependency
+        reloc("io.leangen.geantyref", "geantyref") // Configurate dependency
+        reloc("io.github.milkdrinkers.colorparser", "colorparser")
         reloc("org.bstats", "bstats")
 
         minimize()
@@ -108,6 +114,8 @@ tasks {
         // Automatically install dependencies
         downloadPlugins {
             github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
+            hangar("ViaVersion", "5.2.1")
+            hangar("ViaBackwards", "5.2.1")
         }
     }
 }
