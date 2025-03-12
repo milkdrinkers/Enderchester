@@ -113,7 +113,7 @@ tasks {
 
         // Automatically install dependencies
         downloadPlugins {
-            github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
+//            github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
             hangar("ViaVersion", "5.2.1")
             hangar("ViaBackwards", "5.2.1")
         }
