@@ -138,6 +138,7 @@ bukkit { // Options: https://github.com/Minecrell/plugin-yml#bukkit
     authors = listOf("darksaid98")
     contributors = listOf()
     apiVersion = "1.19"
+    foliaSupported = true
 
     // Misc properties
     load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.POSTWORLD // STARTUP or POSTWORLD
