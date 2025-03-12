@@ -8,7 +8,7 @@ paper-api = "io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT"
 morepaperlib = "space.arim.morepaperlib:morepaperlib:0.4.4"
 
 # API dependencies
-yaml = { module = "org.yaml:snakeyaml", version = "2.2" }
+yaml = { module = "org.yaml:snakeyaml", version = "2.4" }
 configurate-interface-ap = { module = "org.spongepowered:configurate-extra-interface-ap", version.ref = "configurate" }
 configurate-interface = { module = "org.spongepowered:configurate-extra-interface", version.ref = "configurate" }
 configurate-core = { module = "org.spongepowered:configurate-core", version.ref = "configurate" }
