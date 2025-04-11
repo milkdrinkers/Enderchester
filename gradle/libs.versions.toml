@@ -23,6 +23,6 @@ vault = "com.github.MilkBowl:VaultAPI:1.7.1"
 
 [plugins]
 maven-deployer = "io.deepmedia.tools.deployer:0.17.0"
-shadow = "com.gradleup.shadow:9.0.0-beta9"
+shadow = "com.gradleup.shadow:9.0.0-SNAPSHOT"
 run-paper = "xyz.jpenilla.run-paper:2.3.1"
 plugin-yml = "net.minecrell.plugin-yml.bukkit:0.6.0"
