@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Fired before a enderchest is opened by a player through the plugin. Cancelling the event stops the plugin from opening the enderchest for the player.
@@ -34,7 +35,7 @@ public class PreEnderchestOpenedEvent extends Event implements Cancellable {
     }
 
     @Override
-    public HandlerList getHandlers() {
+    public @NotNull HandlerList getHandlers() {
         return HANDLER_LIST;
     }
 

@@ -4,6 +4,7 @@ import io.github.milkdrinkers.enderchester.api.type.OpenMethod;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Fired when a enderchest is opened by a player through the plugin.
@@ -32,7 +33,7 @@ public class EnderchestOpenedEvent extends Event {
     }
 
     @Override
-    public HandlerList getHandlers() {
+    public @NotNull HandlerList getHandlers() {
         return HANDLER_LIST;
     }
 }
