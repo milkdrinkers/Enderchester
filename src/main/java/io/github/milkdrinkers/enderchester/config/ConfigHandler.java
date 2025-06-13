@@ -39,7 +39,6 @@ public class ConfigHandler implements Reloadable {
             .defaultOptions(options ->
                 InterfaceDefaultOptions.defaults()
                     .shouldCopyDefaults(false)
-                    .shouldCopyDefaults(false)
                     .header("EnderChester by darksaid98\nFor more info see https://github.com/milkdrinkers/Enderchester")
                     .mapFactory(
                         MapFactories.insertionOrdered()
