@@ -93,7 +93,7 @@ jobs:
           include-pr-links: true
           include-commit-links: true
           semver: true
-          use-github-autolink: true
+          use-github-autolink: false
 
       # Create release
       - name: Create Release
