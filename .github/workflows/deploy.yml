@@ -147,6 +147,7 @@ jobs:
           api_token: ${{ secrets.HANGAR_TOKEN }}
           slug: 'Enderchester'
           version: ${{ github.ref_name }}
+          description: ${{ steps.changelog.outputs.changelog }}
           channel: ${{ contains(github.ref_name, inputs.prerelease_suffix) && 'Beta' || 'release' }}
           files: |
             [
