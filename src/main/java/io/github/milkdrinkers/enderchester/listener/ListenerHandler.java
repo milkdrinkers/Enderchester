@@ -24,7 +24,6 @@ public class ListenerHandler implements Reloadable {
 
     @Override
     public void onEnable() {
-        // Register listeners here
         plugin.getServer().getPluginManager().registerEvents(new EnderChestListener(plugin.getConfigHandler().getConfig()), plugin);
     }
 
