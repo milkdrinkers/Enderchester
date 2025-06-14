@@ -110,3 +110,52 @@ jobs:
           prerelease: ${{ contains(github.ref_name, inputs.prerelease_suffix) }}
           generate_release_notes: false
           body: ${{ steps.changelog.outputs.changelog }}
+
+      # Publish to Modrinth
+      - name: Publish to Modrinth
+        uses: Kir-Antipov/mc-publish@v3
+        with:
+          modrinth-id: "iEpIvtaS"
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          files: |
+            **/build/libs/!(*-sources|*-javadoc).jar
+          name: ${{ github.ref_name }}
+          version: ${{ github.ref_name }}
+          version-type: ${{ contains(github.ref_name, inputs.prerelease_suffix) && 'beta' || 'release' }}
+          changelog: ${{ steps.changelog.outputs.changelog }}
+          game-versions: |
+            >=1.19
+          loaders: |
+            bukkit
+            spigot
+            paper
+            folia
+            purpur
+          java: |
+            Java 17
+            Java 21
+          dependencies: |
+            {
+              "dependencies": []
+            }
+          fail-mode: warn
+
+      # Publish to Hangar
+      - uses: milkdrinkers/hangar-upload-action@v1.1.0
+        with:
+          api_token: ${{ secrets.HANGAR_TOKEN }}
+          slug: 'Enderchester'
+          version: ${{ github.ref_name }}
+          channel: ${{ contains(github.ref_name, inputs.prerelease_suffix) && 'Beta' || 'release' }}
+          files: |
+            [
+              {
+                "path": "**/build/libs/!(*-sources|*-javadoc).jar",
+                "platforms": ["PAPER"]
+              }
+            ]
+          platform_dependencies: |
+            {
+              "PAPER": [ "1.19.x","1.20.x","1.21.x" ]
+            }
