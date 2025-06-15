@@ -158,5 +158,5 @@ jobs:
             ]
           platform_dependencies: |
             {
-              "PAPER": [ ">=1.19"' ]
+              "PAPER": [ ">=1.19" ]
             }
