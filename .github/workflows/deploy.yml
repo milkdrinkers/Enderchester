@@ -142,7 +142,7 @@ jobs:
           fail-mode: warn
 
       # Publish to Hangar
-      - uses: milkdrinkers/hangar-upload-action@v1.1.4
+      - uses: milkdrinkers/hangar-upload-action@v1.2.0
         with:
           api_token: ${{ secrets.HANGAR_TOKEN }}
           slug: 'Enderchester'
@@ -158,5 +158,5 @@ jobs:
             ]
           platform_dependencies: |
             {
-              "PAPER": [ "1.19.x","1.20.x","1.21.x" ]
+              "PAPER": [ ">=1.19"' ]
             }
