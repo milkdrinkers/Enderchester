@@ -23,6 +23,6 @@ vault = "com.github.MilkBowl:VaultAPI:1.7.1"
 
 [plugins]
 publisher = "com.vanniktech.maven.publish:0.33.0"
-shadow = "com.gradleup.shadow:8.3.6"
+shadow = "com.gradleup.shadow:8.3.7"
 run-paper = "xyz.jpenilla.run-paper:2.3.1"
 plugin-yml = "de.eldoria.plugin-yml.bukkit:0.7.1"
