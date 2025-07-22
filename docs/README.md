@@ -16,6 +16,9 @@
         <img alt="GitHub Issues" src="https://img.shields.io/github/issues/milkdrinkers/Enderchester?style=for-the-badge&labelColor=141417">
     </a>
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/milkdrinkers/Enderchester?style=for-the-badge&labelColor=141417">
+    <a href="https://discord.gg/cG5uWvUcM6">
+        <img alt="Discord Server" src="https://img.shields.io/discord/1008300159333040158?style=for-the-badge&logo=discord&logoColor=ffffff&label=discord&labelColor=141417&color=%235865F2">
+    </a>
 </p>
 
 This plugin is a tiny quality of life addition to Minecraft. It allows players to open their ender chest by holding one in their hand and right-clicking, or right-clicking one in their inventory.
