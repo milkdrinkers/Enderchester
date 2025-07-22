@@ -2,7 +2,6 @@ import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 import java.time.Instant
 import com.vanniktech.maven.publish.JavaLibrary
 import com.vanniktech.maven.publish.JavadocJar
-import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
     `java-library`
