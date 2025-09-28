@@ -18,6 +18,9 @@ public class EnderChesterConfig {
         @Comment("Should we disallow opening enderchests through the plugin when in creative mode?")
         public boolean creative = false;
 
+        @Comment("Close the inventory if the player moves. This prevents using mods to access enderchests while moving.")
+        public boolean disableMoveWhileOpen = false;
+
         @Comment("A list of worldnames where players won't be able to open enderchests through the plugin")
         public BlackListSection blacklist = new BlackListSection();
 

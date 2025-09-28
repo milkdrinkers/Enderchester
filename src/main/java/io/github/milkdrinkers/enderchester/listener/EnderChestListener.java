@@ -1,5 +1,6 @@
 package io.github.milkdrinkers.enderchester.listener;
 
+import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import io.github.milkdrinkers.enderchester.Enderchester;
 import io.github.milkdrinkers.enderchester.api.event.EnderchestOpenedEvent;
 import io.github.milkdrinkers.enderchester.api.event.PreEnderchestOpenedEvent;
@@ -16,8 +17,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.intellij.lang.annotations.Subst;
 
@@ -118,5 +122,64 @@ public class EnderChestListener implements Listener {
         });
 
         return true;
+    }
+
+    @SuppressWarnings("unused")
+    @EventHandler
+    public void onPlayerJump(PlayerJumpEvent e) { // Close enderchest if starts jumping
+        if (!config.check.disableMoveWhileOpen)
+            return;
+
+        if (e.isCancelled())
+            return;
+
+        if (!e.getPlayer().getOpenInventory().getTopInventory().getType().equals(InventoryType.ENDER_CHEST))
+            return;
+
+        e.getPlayer().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+    }
+
+    @SuppressWarnings("unused")
+    @EventHandler
+    public void onPlayerJump(PlayerToggleSneakEvent e) { // Close enderchest if starts sneaking
+        if (!config.check.disableMoveWhileOpen)
+            return;
+
+        if (e.isCancelled())
+            return;
+
+        if (!e.isSneaking()) // Only do on sneak initiate as players may un-sneak automatically
+            return;
+
+        if (!e.getPlayer().getOpenInventory().getTopInventory().getType().equals(InventoryType.ENDER_CHEST))
+            return;
+
+        e.getPlayer().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+    }
+
+    @SuppressWarnings("unused")
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent e) { // Close enderchest if player moves
+        if (!config.check.disableMoveWhileOpen)
+            return;
+
+        if (e.isCancelled())
+            return;
+
+        if (!e.hasChangedBlock() && !e.hasChangedOrientation())
+            return;
+
+        final Player p = e.getPlayer();
+
+        if (!p.getGameMode().equals(GameMode.SURVIVAL) && !p.getGameMode().equals(GameMode.ADVENTURE))
+            return;
+
+        if (!p.getOpenInventory().getTopInventory().getType().equals(InventoryType.ENDER_CHEST))
+            return;
+
+        if (p.isGliding()) // Allow accessing while gliding
+            return;
+
+        p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
     }
 }
