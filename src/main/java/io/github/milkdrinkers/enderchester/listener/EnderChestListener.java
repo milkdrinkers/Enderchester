@@ -177,7 +177,7 @@ public class EnderChestListener implements Listener {
         if (!p.getOpenInventory().getTopInventory().getType().equals(InventoryType.ENDER_CHEST))
             return;
 
-        if (p.isGliding()) // Allow accessing while gliding
+        if (p.isGliding() || p.isFlying()) // Allow accessing while gliding
             return;
 
         p.closeInventory(InventoryCloseEvent.Reason.PLUGIN);
