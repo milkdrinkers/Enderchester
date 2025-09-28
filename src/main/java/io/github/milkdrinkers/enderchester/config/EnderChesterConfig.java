@@ -65,5 +65,5 @@ public class EnderChesterConfig {
     }
 
     @Comment("Do not change this value!")
-    public int configVersion = 2;
+    public int configVersion = 3;
 }
