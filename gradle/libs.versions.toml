@@ -13,7 +13,7 @@ configurate-interface-ap = { module = "org.spongepowered:configurate-extra-inter
 configurate-interface = { module = "org.spongepowered:configurate-extra-interface", version.ref = "configurate" }
 configurate-core = { module = "org.spongepowered:configurate-core", version.ref = "configurate" }
 configurate-yaml = { module = "org.spongepowered:configurate-yaml", version.ref = "configurate" }
-colorparser = "io.github.milkdrinkers:colorparser:3.0.1"
+colorparser = "io.github.milkdrinkers:colorparser:4.1.0"
 
 # Plugin dependencies
 bstats = "org.bstats:bstats-bukkit:3.1.0"
