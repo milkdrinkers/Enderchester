@@ -142,7 +142,7 @@ jobs:
           fail-mode: warn
 
       # Publish to Hangar
-      - uses: milkdrinkers/Hangar-Publish@v1
+      - uses: milkdrinkers/Hangar-Publish@v2
         with:
           api_token: ${{ secrets.HANGAR_TOKEN }}
           slug: 'Enderchester'
