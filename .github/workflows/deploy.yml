@@ -34,7 +34,7 @@ jobs:
     steps:
       # Download the release artifacts uploaded in the previous workflow
       - name: Download Artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v7
         id: download
         continue-on-error: false
         with:
@@ -142,7 +142,7 @@ jobs:
           fail-mode: warn
 
       # Publish to Hangar
-      - uses: milkdrinkers/Hangar-Publish@v1
+      - uses: milkdrinkers/Hangar-Publish@v2
         with:
           api_token: ${{ secrets.HANGAR_TOKEN }}
           slug: 'Enderchester'

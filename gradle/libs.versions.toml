@@ -13,7 +13,7 @@ configurate-interface-ap = { module = "org.spongepowered:configurate-extra-inter
 configurate-interface = { module = "org.spongepowered:configurate-extra-interface", version.ref = "configurate" }
 configurate-core = { module = "org.spongepowered:configurate-core", version.ref = "configurate" }
 configurate-yaml = { module = "org.spongepowered:configurate-yaml", version.ref = "configurate" }
-colorparser = "io.github.milkdrinkers:colorparser:3.0.1"
+colorparser = "io.github.milkdrinkers:colorparser:4.1.0"
 
 # Plugin dependencies
 bstats = "org.bstats:bstats-bukkit:3.1.0"
@@ -22,7 +22,7 @@ vault = "com.github.MilkBowl:VaultAPI:1.7.1"
 [bundles]
 
 [plugins]
-publisher = "com.vanniktech.maven.publish:0.34.0"
-shadow = "com.gradleup.shadow:9.2.2"
-run-paper = "xyz.jpenilla.run-paper:3.0.0"
+publisher = "com.vanniktech.maven.publish:0.36.0"
+shadow = "com.gradleup.shadow:9.3.1"
+run-paper = "xyz.jpenilla.run-paper:3.0.2"
 plugin-yml = "de.eldoria.plugin-yml.bukkit:0.8.0"
