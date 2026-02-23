@@ -16,7 +16,7 @@ configurate-yaml = { module = "org.spongepowered:configurate-yaml", version.ref 
 colorparser = "io.github.milkdrinkers:colorparser:4.1.0"
 
 # Plugin dependencies
-bstats = "org.bstats:bstats-bukkit:3.1.0"
+bstats = "org.bstats:bstats-bukkit:3.2.0"
 vault = "com.github.MilkBowl:VaultAPI:1.7.1"
 
 [bundles]
