@@ -5,7 +5,7 @@ configurate = "4.2.0-GeyserMC-SNAPSHOT"
 # Core dependencies
 annotations = "org.jetbrains:annotations:26.1.0"
 paper-api = "io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT"
-morepaperlib = "space.arim.morepaperlib:morepaperlib:0.4.4"
+morepaperlib = "space.arim.morepaperlib:morepaperlib:0.5.3"
 
 # API dependencies
 yaml = { module = "org.yaml:snakeyaml", version = "2.5" }
