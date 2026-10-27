@@ -1,5 +1,5 @@
 [versions]
-configurate = "4.2.0-GeyserMC-SNAPSHOT"
+configurate = "4.3.0-GeyserMC"
 
 [libraries]
 # Core dependencies
